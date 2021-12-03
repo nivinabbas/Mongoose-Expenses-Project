@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/expense', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI||'mongodb://localhost/expense');
+// mongoose.connect('mongodb://localhost/expense', { useNewUrlParser: true });
 
 const Schema = mongoose.Schema;
 

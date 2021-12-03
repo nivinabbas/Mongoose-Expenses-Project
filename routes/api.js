@@ -3,7 +3,9 @@ const router = express.Router();
 let Expense = require('../model/Expense');
 const moment = require('moment');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/expense', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/expense');
+
+// mongoose.connect('mongodb://localhost/expense', { useNewUrlParser: true });
 
 router.get('/expenses', function (request, response) {
   let d1 = request.query.d1;
@@ -35,7 +37,7 @@ router.get('/expenses', function (request, response) {
 router.post('/expense', function (request, res) {
   let addExpense;
   let addNewDate = new Date();
- 
+
   let dateOccur = request.body.date;
 
   dateOccur
@@ -61,7 +63,6 @@ router.post('/expense', function (request, res) {
 });
 
 router.put('/update', function (req, res) {
- 
   let group1 = req.body.group1;
   let group2 = req.body.group2;
 
